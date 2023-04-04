@@ -1,1 +1,25 @@
-/*# sourceMappingURL=style.css.map */
+@font-face {
+  font-family: "Noto Serif JP";
+  font-weight: 700;
+  src: url("../font/subset_NotoSerifJP-Bold.woff") format("woff"), url("../font/subset_NotoSerifJP-Bold.woff2") format("woff2");
+}
+/*=================various=================*/
+/*-----h1~6-----*/
+h1 {
+  font-size: 4rem;
+}
+
+/*-----body-----*/
+body {
+  font-family: "Noto Serif JP";
+  width: 100vw;
+}
+
+/*=================header=================*/
+header {
+  background-image: url("../img/head_backimage.jpg");
+  -o-object-fit: fill;
+     object-fit: fill;
+  width: 100%;
+  height: 1080px;
+}/*# sourceMappingURL=style.css.map */

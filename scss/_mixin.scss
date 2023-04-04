@@ -1,0 +1,27 @@
+//-----------------------------------------------------------------------------------------------------------//
+//	@font-face
+// 		呼び出し
+// 		@include font-face('<フォント名>', '＜フォントファイルまでのパス＞', <ウェイト>, <スタイル>, <タイプ>);
+//-----------------------------------------------------------------------------------------------------------//
+@mixin font-face($name, $path, $weight: null, $style: null, $exts: otf ttf woff woff2) {
+	$src: null;
+
+	$formats: (
+		otf: "opentype",
+		ttf: "truetype",
+		woff: "woff",
+		woff2: "woff2",
+	);
+
+	@each $ext in $exts {
+		$format: map-get($formats, $ext);
+		$src: append($src, url(quote($path + '.' + quote($format))) format(quote($format)), comma);
+	}
+
+	@font-face {
+		font-family: quote($name);
+		font-style:  $style;
+		font-weight: $weight;
+		src: $src;
+	}
+}
