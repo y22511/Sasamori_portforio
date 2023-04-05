@@ -1,29 +1,108 @@
 @use './mixin' as font;
-@include font.font-face('Noto Serif JP', '../font/subset_NotoSerifJP-Bold', 700, null, woff woff2);
+
+
+/*=================var=================*/
+/*-----color-----*/
+$color-body: #f8f8f8;
+$color-heading: #1e507e;
+$color-nav_line: #1e507e;
 
 
 /*=================various=================*/
-/*-----h1~6-----*/
-h1 {
-	font-size: 4rem;
-}
-h2 {
+/*-----font-----*/
+@include font.font-face('Noto Serif JP', '../font/subset_NotoSerifJP-Bold', 700, null, woff woff2);
 
-}
-h3 {
 
+/*-----clearfix-----*/
+.clearfix {
+	display: block;
+
+	//clearfix::before
+	&::before {
+		content: "";
+		display: block;
+		clear: both;
+	}
+
+	//clearfix::after
+	&::after {
+		content: "";
+		display: block;
+		clear: both;
+	}
 }
+
 
 /*-----body-----*/
 body {
 	font-family: "Noto Serif JP";
-	width: 100vw;
+	background: $color-body;
+	box-sizing: border-box;
+}
+
+
+/*-----h1~6-----*/
+h1 {
+	height: 80%;
+	font-size: 6em;
+	color: $color-heading;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+h2 {
+	font-size: 4em;
+	color: $color-heading;
+	text-align: center;
+}
+h3 {
+	color: $color-heading;
 }
 
 /*=================header=================*/
 header {
-	background-image: url("../img/head_backimage.jpg");
-	object-fit: fill;
 	width: 100%;
-	height: 1080px;
+	height: 100vh;
+	background: {
+		image: url("../img/head_backimage.jpg");
+		color: rgba(255, 255, 255, 0.5);
+		blend-mode: lighten;
+		size: 100% 1080px;
+		repeat: no-repeat;
+	};
+	clip-path: polygon(0 0, 100% 0, 100% 80%, 50% 100%, 0 80%);
+}
+
+
+/*-----nav-----*/
+nav {
+	width: 40%;
+	margin: 0 auto;
+}
+
+/*-----nav-content-----*/
+.nav-content {
+	width: 20%;
+	padding: 0.8em 0;
+	text-align: center;
+	float: left;
+	position: relative;
+
+	//.nav-content a
+	a {
+		font-size: 1.2rem;
+	}
+
+	//.nav-content::after
+	&::after {
+		content: "";
+		width: 20%;
+		height: 4px;
+		background-color: $color-nav_line;
+		border-radius: 20%;
+		position: absolute;
+		bottom: 4px;
+		left: 50%;
+		transform: translateX(-50%);
+	}
 }
