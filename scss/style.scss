@@ -1,7 +1,43 @@
 @use './mixin' as font;
 
 
+/*=================function=================*/
+@function skillsMeter($value) {
+	@if $value == 1 {
+		@return 90%;
+	}
+	@else if $value == 11 {
+		@return 85%;
+	}
+	@else if $value == 2 {
+		@return 80%;
+	}
+	@else if $value == 3 or $value == 4 or $value == 10 {
+		@return 70%;
+	}
+	@else if $value == 5 {
+		@return 60%;
+	}
+	@else if $value == 9 {
+		@return 50%;
+	}
+	@else if $value == 6 or $value == 7 {
+		@return 40%;
+	}
+	@else if $value == 8 {
+		@return 20%;
+	}
+	@else {
+		@return 0;
+	}
+}
+
+
 /*=================var=================*/
+/*-----for-----*/
+$for-start-skills: 1;
+$for-end-skills: 11;
+
 /*-----color-----*/
 $color-body: #f8f8f8;
 $color-heading: #1e507e;
@@ -11,6 +47,9 @@ $color-about-heading: #ffffff;		//テキストの色
 $color-about-heading2: #7aa3c9;	//ボックスの色
 $color-about-heading3: #ffffff;	//左の〇の色
 $color-about-dt_line: #1e507e;
+$color-skills-contents_back: #89a1d4;
+$color-skills-contents_img: #ffffff;
+$color-skills-contents_meter: #3bc4d7;
 
 
 /*=================various=================*/
@@ -56,6 +95,7 @@ h1 {
 	justify-content: center;
 }
 h2 {
+	width: 100%;
 	padding: 4rem 0 2rem;
 	font-size: 4em;
 	color: $color-heading;
@@ -66,6 +106,13 @@ h3 {
 }
 h4 {
 	font-size: 1.5em;
+}
+h5 {
+	width: 100%;
+	height: 20%;
+	margin: 0.4em 0;
+	font-size: 1.5em;
+	text-align: center;
 }
 
 /*=================header=================*/
@@ -124,11 +171,6 @@ section {
 	height: 100%;
 }
 
-/*-----#about-----*/
-// #about {
-	
-// }
-
 /*-----.about-base-----*/
 .about-base {
 	display: flex;
@@ -147,7 +189,6 @@ section {
 		text-align: center;
 	}
 }
-
 
 /*-----.about-favorite-----*/
 .about-favorite {
@@ -237,6 +278,84 @@ section {
 		margin: 0 auto;
 		font-size: 1.2em;
 		line-height: 2em;
+	}
+}
+
+
+/*-----#skills-----*/
+#skills {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+/*-----.skills_main-----*/
+.skills-main {
+	width: 20%;
+
+	//~~768px
+	@media screen and (min-width: 960px) {
+		order: 1;
+	}
+}
+
+/*-----.skills-box-----*/
+.skills-box {
+	width: 60%;
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+
+	//.skills-box::after
+	&::after {
+		content: "";
+		width: 22%;
+		height: 20px;
+		min-width: 160px;
+		display: block;
+	}
+}
+
+/*-----.skills-contents-----*/
+.skills-contents {
+	width: 22%;
+	min-width: 160px;
+	margin-bottom: 2%;
+	background-color: $color-skills-contents_back;
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	position: relative;
+
+	//.skills-contents img
+	img {
+		width: 32%;
+		margin: 0 4% 4%;
+		background: $color-skills-contents_img;
+		border-radius: 50%;
+	}
+
+	//.skills-contents p
+	p {
+		margin: 0 auto;
+		font-size: 1.8em;
+	}
+
+	&::before {
+		content: "";
+		width: 100%;
+		height: 100%;
+		background: $color-skills-contents_meter;
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+}
+
+@for $i from $for-start-skills through $for-end-skills {
+	.skills-contents:nth-child(#{$i})::before {
+		width: skillsMeter(8);
 	}
 }
 

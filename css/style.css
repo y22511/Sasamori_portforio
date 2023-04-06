@@ -1,5 +1,7 @@
 @charset "UTF-8";
+/*=================function=================*/
 /*=================var=================*/
+/*-----for-----*/
 /*-----color-----*/
 /*=================various=================*/
 /*-----font-----*/
@@ -41,6 +43,7 @@ h1 {
 }
 
 h2 {
+  width: 100%;
   padding: 4rem 0 2rem;
   font-size: 4em;
   color: #1e507e;
@@ -53,6 +56,14 @@ h3 {
 
 h4 {
   font-size: 1.5em;
+}
+
+h5 {
+  width: 100%;
+  height: 20%;
+  margin: 0.4em 0;
+  font-size: 1.5em;
+  text-align: center;
 }
 
 /*=================header=================*/
@@ -103,7 +114,6 @@ section {
   height: 100%;
 }
 
-/*-----#about-----*/
 /*-----.about-base-----*/
 .about-base {
   display: flex;
@@ -190,6 +200,114 @@ section {
   margin: 0 auto;
   font-size: 1.2em;
   line-height: 2em;
+}
+
+/*-----#skills-----*/
+#skills {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/*-----.skills_main-----*/
+.skills-main {
+  width: 20%;
+}
+@media screen and (min-width: 960px) {
+  .skills-main {
+    order: 1;
+  }
+}
+
+/*-----.skills-box-----*/
+.skills-box {
+  width: 60%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.skills-box::after {
+  content: "";
+  width: 22%;
+  height: 20px;
+  min-width: 160px;
+  display: block;
+}
+
+/*-----.skills-contents-----*/
+.skills-contents {
+  width: 22%;
+  min-width: 160px;
+  margin-bottom: 2%;
+  background-color: #89a1d4;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  position: relative;
+}
+.skills-contents img {
+  width: 32%;
+  margin: 0 4% 4%;
+  background: #ffffff;
+  border-radius: 50%;
+}
+.skills-contents p {
+  margin: 0 auto;
+  font-size: 1.8em;
+}
+.skills-contents::before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  background: #3bc4d7;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.skills-contents:nth-child(1)::before {
+  width: 20%;
+}
+
+.skills-contents:nth-child(2)::before {
+  width: 20%;
+}
+
+.skills-contents:nth-child(3)::before {
+  width: 20%;
+}
+
+.skills-contents:nth-child(4)::before {
+  width: 20%;
+}
+
+.skills-contents:nth-child(5)::before {
+  width: 20%;
+}
+
+.skills-contents:nth-child(6)::before {
+  width: 20%;
+}
+
+.skills-contents:nth-child(7)::before {
+  width: 20%;
+}
+
+.skills-contents:nth-child(8)::before {
+  width: 20%;
+}
+
+.skills-contents:nth-child(9)::before {
+  width: 20%;
+}
+
+.skills-contents:nth-child(10)::before {
+  width: 20%;
+}
+
+.skills-contents:nth-child(11)::before {
+  width: 20%;
 }
 
 /*-----#contact-----*/
