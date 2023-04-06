@@ -1,7 +1,7 @@
 @use './mixin' as font;
 
 
-/*=================function=================*/
+//=================function=================//
 @function skillsMeter($value) {
 	@if $value == 1 {
 		@return 90%;
@@ -33,12 +33,12 @@
 }
 
 
-/*=================var=================*/
-/*-----for-----*/
+//=================var=================//
+//-----for-----//
 $for-start-skills: 1;
 $for-end-skills: 11;
 
-/*-----color-----*/
+//-----color-----//
 $color-body: #f8f8f8;
 $color-heading: #1e507e;
 $color-nav_line: #1e507e;
@@ -47,12 +47,15 @@ $color-about-heading: #ffffff;		//テキストの色
 $color-about-heading2: #7aa3c9;	//ボックスの色
 $color-about-heading3: #ffffff;	//左の〇の色
 $color-about-dt_line: #1e507e;
-$color-skills-contents_back: #89a1d4;
+$color-skills-main_meter1: #3bc4d7;	//メーターの色
+$color-skills-main_meter2: #d9d9d9;	//メーターの色
+$color-skills-main_center: #ffffff;	//真ん中の色
+$color-skills-contents_back: #d9d9d9;
 $color-skills-contents_img: #ffffff;
 $color-skills-contents_meter: #3bc4d7;
 
 
-/*=================various=================*/
+//=================various=================//
 /*-----font-----*/
 @include font.font-face('Noto Serif JP', '../font/subset_NotoSerifJP-Bold', 700, null, woff woff2);
 
@@ -288,21 +291,39 @@ section {
 	justify-content: center;
 	align-items: center;
 	flex-wrap: wrap;
+	
+	h2 {
+		margin-bottom: 0.5em;
+	}
 }
 
 /*-----.skills_main-----*/
 .skills-main {
-	width: 20%;
+	width: 280px;
+	height: 280px;
+	margin: 0 4%;
+	background-image: radial-gradient($color-skills-main_center 56%, transparent 57%),
+						conic-gradient($color-skills-main_meter1 0% 60%, $color-skills-main_meter2 60% 100%);
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	
 
 	//~~768px
 	@media screen and (min-width: 960px) {
 		order: 1;
 	}
+
+	//.skills-main img
+	img {
+		width: 80%;
+	}
 }
 
 /*-----.skills-box-----*/
 .skills-box {
-	width: 60%;
+	width: 56%;
 	display: flex;
 	justify-content: space-between;
 	flex-wrap: wrap;
@@ -328,34 +349,40 @@ section {
 	flex-wrap: wrap;
 	position: relative;
 
+	//.skills-contents h5
+	h5 {
+		position: relative;
+	}
+
 	//.skills-contents img
 	img {
 		width: 32%;
 		margin: 0 4% 4%;
 		background: $color-skills-contents_img;
 		border-radius: 50%;
+		position: relative;
+
 	}
 
 	//.skills-contents p
 	p {
 		margin: 0 auto;
 		font-size: 1.8em;
+		position: relative;
 	}
 
+	//.skills-contents::before
 	&::before {
 		content: "";
-		width: 100%;
 		height: 100%;
 		background: $color-skills-contents_meter;
 		position: absolute;
-		top: 0;
-		left: 0;
 	}
 }
 
 @for $i from $for-start-skills through $for-end-skills {
 	.skills-contents:nth-child(#{$i})::before {
-		width: skillsMeter(8);
+		width: skillsMeter($i);
 	}
 }
 
