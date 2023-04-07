@@ -4,7 +4,10 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>笹森悠誠のポートフォリオ</title>
+		<!--css-->
 		<link rel="stylesheet" href="css/reset_css/destyle.min.css">
+		<link rel="stylesheet" href="css/slick_css/slick.css"/>
+		<link rel="stylesheet" href="css/slick_css/slick-theme.css"/>
 		<link rel="stylesheet" href="css/style.min.css">
 	</head>
 	<body>
@@ -124,15 +127,16 @@
 			<!-- Works -->
 			<section id="works">
 				<h2>Works</h2>
-				<div>
-					<div>
-						<img src="" alt="">
-					</div>
-					<div>
-						<h4>タイトル</h4>
-						<p>テキスト</p>
-					</div>
-				</div>
+				<ul class="works-box slider">
+					<li class="works-contents">
+						<img src="img/works/works_img1.png" alt="work-img1">
+						<a href="https://y22511.github.io/D_abata_finish/">open</a>
+					</li>		
+					<li class="works-contents">
+						<img src="img/works/works_img1.png" alt="work-img1">
+						<a href="https://y22511.github.io/D_abata_finish/">open</a>
+					</li>		
+				</ul>
 			</section>
 
 			<!-- Contact -->
@@ -150,5 +154,10 @@
 		<footer>
 			<p>&copy; YUSEI SASAMORI</p>
 		</footer>
+
+		<!--js-->
+		<script src="javascript/jquery-3.6.4.min.js"></script>
+		<script type="text/javascript" src="javascript/slick.min.js"></script>
+		<script type="text/javascript" src="javascript/main.js"></script>
 	</body>
 </html>

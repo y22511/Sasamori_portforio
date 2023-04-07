@@ -361,7 +361,6 @@ section {
 		background: $color-skills-contents_img;
 		border-radius: 50%;
 		position: relative;
-
 	}
 
 	//.skills-contents p
@@ -385,6 +384,38 @@ section {
 		width: skillsMeter($i);
 	}
 }
+
+/*-----#works-----*/
+#works {
+	h2 {
+		margin-bottom: 0.5em;
+	}
+}
+
+/*-----.works-box-----*/
+// .works-box {
+// 	width: 100%;
+// }
+
+/*-----.works-contents-----*/
+.works-contents {
+	width: 800px;
+	height: 800px;
+	overflow: hidden;
+
+	//.works-contents
+	img {
+		height: 60%;
+	}
+
+	//.works-contents a
+	a {
+		width: 100%;
+		height: auto;
+		
+	}
+}
+
 
 /*-----#contact-----*/
 #contact {

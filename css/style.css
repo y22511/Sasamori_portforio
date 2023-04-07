@@ -320,6 +320,26 @@ section {
   width: 85%;
 }
 
+/*-----#works-----*/
+#works h2 {
+  margin-bottom: 0.5em;
+}
+
+/*-----.works-box-----*/
+/*-----.works-contents-----*/
+.works-contents {
+  width: 800px;
+  height: 800px;
+  overflow: hidden;
+}
+.works-contents img {
+  height: 60%;
+}
+.works-contents a {
+  width: 100%;
+  height: auto;
+}
+
 /*-----#contact-----*/
 #contact {
   height: 720px;
