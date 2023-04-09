@@ -326,18 +326,32 @@ section {
 }
 
 /*-----.works-box-----*/
+.works-box {
+  width: 80%;
+  margin: 0 auto;
+}
+
 /*-----.works-contents-----*/
 .works-contents {
-  width: 800px;
-  height: 800px;
-  overflow: hidden;
+  width: 40%;
+  margin: 0 10px;
 }
 .works-contents img {
-  height: 60%;
+  width: 80%;
 }
 .works-contents a {
   width: 100%;
   height: auto;
+}
+
+/*-----.slick-left-----*/
+.slick-left {
+  background: black;
+}
+
+/*-----.slick-right-----*/
+.slick-right {
+  background: blue;
 }
 
 /*-----#contact-----*/
