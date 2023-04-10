@@ -394,18 +394,15 @@ section {
 
 /*-----.works-box-----*/
 .works-box {
-	width: 80%;
-	margin: 0 auto;
+	width: 100%;
 }
 
 /*-----.works-contents-----*/
 .works-contents {
-	width: 40%;
-	margin: 0 10px;
 
 	//.works-contents
 	img {
-		width: 80%;
+		width: 120%;
 	}
 
 	//.works-contents a
@@ -418,12 +415,16 @@ section {
 
 /*-----.slick-left-----*/
 .slick-left {
-	background: black;
+	transform: translate3d(50px, 0px, -200px) rotateX(0deg) rotateY(30deg) scale(1);
 }
 
+/*-----.slick-center-----*/
+.slick-center {
+	z-index: 1;
+}
 /*-----.slick-right-----*/
 .slick-right {
-	background: blue;
+	transform: translate3d(-50px, 0px, -200px) rotateX(0deg) rotateY(-30deg) scale(1);
 }
 
 /*-----#contact-----*/

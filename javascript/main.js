@@ -42,7 +42,8 @@ $(function() {
 	})
 
 	.on('afterChange', function () {
-		$('[data-slick-index="-1"]').addClass('slick-left');
-		$('[data-slick-index="1"]').addClass('slick-right');
+		$('.slick-center').prev().addClass('slick-left').removeClass('slick-right');
+		$('.slick-center').next().addClass('slick-right').removeClass('slick-left');
+		$('.slick-center').removeClass('slick-left slick-right');
 	});
 });
