@@ -399,10 +399,13 @@ section {
 
 /*-----.works-contents-----*/
 .works-contents {
+	position: relative;
+
 
 	//.works-contents
 	img {
-		width: 120%;
+		// width: 80%;
+		margin: 0 auto;
 	}
 
 	//.works-contents a
@@ -413,19 +416,38 @@ section {
 	}
 }
 
+.slick-list {
+	transform-style: preserve-3d;
+	perspective: 1200px;
+}
+
+.slick-track {
+	transform: preserve-3d;
+	transform: translate3d(0px, 0px, 0px);
+}
+
 /*-----.slick-left-----*/
 .slick-left {
+	position: relative;
+	top: 0;
+	transform-style: preserve-3d;
 	transform: translate3d(50px, 0px, -200px) rotateX(0deg) rotateY(30deg) scale(1);
 }
 
 /*-----.slick-center-----*/
 .slick-center {
-	z-index: 1;
+	position: relative;
+	transform: translate3d(0px, 0px, 0px) rotateX(0deg) rotateY(0deg) scale(1);
 }
+
 /*-----.slick-right-----*/
 .slick-right {
+	position: relative;
+	top: 0;
+	transform-style: preserve-3d;
 	transform: translate3d(-50px, 0px, -200px) rotateX(0deg) rotateY(-30deg) scale(1);
 }
+
 
 /*-----#contact-----*/
 #contact {
