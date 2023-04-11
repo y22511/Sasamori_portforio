@@ -333,8 +333,12 @@ section {
 /*-----.works-contents-----*/
 .works-contents {
   position: relative;
+  transform-style: preserve-3d;
+  transform: translate3d(0px, 0px, 0px);
+  perspective: 1200px;
 }
 .works-contents img {
+  width: 100%;
   margin: 0 auto;
 }
 .works-contents a {
@@ -342,20 +346,13 @@ section {
   height: auto;
 }
 
-.slick-list {
-  transform-style: preserve-3d;
-  perspective: 1200px;
-}
-
-.slick-track {
-  transform: preserve-3d;
-  transform: translate3d(0px, 0px, 0px);
-}
-
 /*-----.slick-left-----*/
 .slick-left {
   position: relative;
   top: 0;
+}
+.slick-left img {
+  position: relative;
   transform-style: preserve-3d;
   transform: translate3d(50px, 0px, -200px) rotateX(0deg) rotateY(30deg) scale(1);
 }
@@ -363,6 +360,10 @@ section {
 /*-----.slick-center-----*/
 .slick-center {
   position: relative;
+}
+.slick-center img {
+  position: relative;
+  transform-style: preserve-3d;
   transform: translate3d(0px, 0px, 0px) rotateX(0deg) rotateY(0deg) scale(1);
 }
 
@@ -370,6 +371,9 @@ section {
 .slick-right {
   position: relative;
   top: 0;
+}
+.slick-right img {
+  position: relative;
   transform-style: preserve-3d;
   transform: translate3d(-50px, 0px, -200px) rotateX(0deg) rotateY(-30deg) scale(1);
 }
