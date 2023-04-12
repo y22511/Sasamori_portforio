@@ -89,6 +89,8 @@ nav {
   position: relative;
 }
 .nav-content a {
+  width: 100%;
+  height: auto;
   font-size: 1.2rem;
 }
 .nav-content::after {
@@ -354,12 +356,13 @@ section {
 .slick-left img {
   position: relative;
   transform-style: preserve-3d;
-  transform: translate3d(50px, 0px, -200px) rotateX(0deg) rotateY(30deg) scale(1);
+  transform: translate3d(160px, 0px, -200px) rotateX(0deg) rotateY(30deg) scale(1);
 }
 
 /*-----.slick-center-----*/
 .slick-center {
   position: relative;
+  z-index: 1;
 }
 .slick-center img {
   position: relative;
@@ -375,7 +378,7 @@ section {
 .slick-right img {
   position: relative;
   transform-style: preserve-3d;
-  transform: translate3d(-50px, 0px, -200px) rotateX(0deg) rotateY(-30deg) scale(1);
+  transform: translate3d(-160px, 0px, -200px) rotateX(0deg) rotateY(-30deg) scale(1);
 }
 
 /*-----#contact-----*/

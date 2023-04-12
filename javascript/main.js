@@ -1,27 +1,35 @@
 /*==========variable==========*/
+let slickCenter = document.querySelector('.slick-center');
 let slickLeft = "";
 let slickRight = "";
 
 /*==========function==========*/
 /*-----slick-----*/
-function getSlickLR(array) {
-	for ( item of array ) {
-		let dataSlickIndex = Number(item.getAttribute('data-slick-index'));
-		console.log(dataSlickIndex);
-		switch (dataSlickIndex) {
-			case -1:
-				slickLeft = item;
-				break;
+function getPosition() {
 
-			case 1:
-				slickRight = item;
-				break;
+	let slickLeft = slickCenter.previousElementSibling;
+	let slickRight = slickCenter.nextElementSibling;
 
-			default:
-				break;
-		}
-	};
 }
+
+// function getSlickLR(array) {
+// 	for ( item of array ) {
+// 		let dataSlickIndex = Number(item.getAttribute('data-slick-index'));
+// 		console.log(dataSlickIndex);
+// 		switch (dataSlickIndex) {
+// 			case -1:
+// 				slickLeft = item;
+// 				break;
+
+// 			case 1:
+// 				slickRight = item;
+// 				break;
+
+// 			default:
+// 				break;
+// 		}
+// 	};
+// }
 
 /*==========window.onload==========*/
 window.onload = function() {
@@ -32,7 +40,7 @@ window.onload = function() {
 }
 
 
-/*==========jQuery==========*/
+/*==========main==========*/
 /*-----slick-----*/
 $(function() {
 	$('.slider').slick({
@@ -41,9 +49,17 @@ $(function() {
 		dots: true,
 	})
 
-	.on('afterChange', function () {
-		$('.slick-center').prev().addClass('slick-left').removeClass('slick-right');
-		$('.slick-center').next().addClass('slick-right').removeClass('slick-left');
-		$('.slick-center').removeClass('slick-left slick-right');
-	});
+	let worksBox = document.querySelector('.works-box');
+	worksBox.addEventListener('mousedown', e => {
+		// let slickCenter = document.querySelector('.slick-center');
+		// let slickLeft = slickCenter.previousElementSibling;
+		// let slickRight = slickCenter.nextElementSibling;
+		let rect = getPosition();
+	})
+	
+	// .on('beforeChange', function () {
+	// 	$('.slick-center').prev().addClass('slick-left').removeClass('slick-right');
+	// 	$('.slick-center').next().addClass('slick-right').removeClass('slick-left');
+	// 	$('.slick-center').removeClass('slick-left slick-right');
+	// });
 });
