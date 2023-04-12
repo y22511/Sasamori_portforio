@@ -1,4 +1,8 @@
 @charset "UTF-8";
+:root {
+  --slick-left_rotate: 30deg;
+}
+
 /*-----font-----*/
 @font-face {
   font-family: "Noto Serif JP";
@@ -356,7 +360,7 @@ section {
 .slick-left img {
   position: relative;
   transform-style: preserve-3d;
-  transform: translate3d(160px, 0px, -200px) rotateX(0deg) rotateY(30deg) scale(1);
+  transform: translate3d(160px, 0px, -200px) rotateX(0deg) rotateY(--slick-left_rotate) scale(1);
 }
 
 /*-----.slick-center-----*/

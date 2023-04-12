@@ -55,6 +55,13 @@ $color-skills-contents_img: #ffffff;
 $color-skills-contents_meter: #3bc4d7;
 
 
+//=================customProperty=================//
+:root {
+//-----slick-----//
+	--slick-left_rotate: 30deg;
+}
+
+
 //=================various=================//
 /*-----font-----*/
 @include font.font-face('Noto Serif JP', '../font/subset_NotoSerifJP-Bold', 700, null, woff woff2);
@@ -440,7 +447,7 @@ section {
 	img {
 		position: relative;
 		transform-style: preserve-3d;
-		transform: translate3d(160px, 0px, -200px) rotateX(0deg) rotateY(30deg) scale(1);
+		transform: translate3d(160px, 0px, -200px) rotateX(0deg) rotateY(--slick-left_rotate) scale(1);
 	}
 }
 

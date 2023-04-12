@@ -1,15 +1,40 @@
 /*==========variable==========*/
-let slickCenter = document.querySelector('.slick-center');
-let slickLeft = "";
-let slickRight = "";
+let slickCenter = '';
+let slickLeft = '';
+let slickRight = '';
+let slickLeftX = '';
+let slickCenterX = '';
+let slickRightX = '';
+let slickOriginalLeftX = '';
+let slickOriginalCenterX = ''; 
+let slickOriginalRightX = '';
+let slickLeftRotato = 0;
+let slickRotato = 30;	//変化後のrotate
+let slickAddNumber = 0;		//slickの加算値
+
 
 /*==========function==========*/
 /*-----slick-----*/
-function getPosition() {
-
-	let slickLeft = slickCenter.previousElementSibling;
-	let slickRight = slickCenter.nextElementSibling;
-
+function getSlickCLR() {
+	slickCenter = document.querySelector('.slick-center');
+	slickLeft = slickCenter.previousElementSibling;
+	slickRight = slickCenter.nextElementSibling;
+}
+function getOriginalPosition() {
+	getSlickCLR();
+	slickOriginalLeftX = slickLeft.getBoundingClientRect().left;
+	slickOriginalCenterX = slickCenter.getBoundingClientRect().left;
+	slickOriginalRightX = slickRight.getBoundingClientRect().left;
+	console.log("L:"+ slickOriginalLeftX + "   C" + slickOriginalCenterX + "   R:" + slickOriginalRightX);
+}
+function getMovePosition() {
+	getSlickCLR();
+	let slickLeftX = slickLeft.getBoundingClientRect().left;
+	let slickCenterX = slickCenter.getBoundingClientRect().left;
+	let slickRightX = slickCenter.getBoundingClientRect().left;
+	console.log("CENTER:" + slickCenterX);
+	console.log("LEFT:" + slickLeftX);
+	console.log("Right" + slickRightX);
 }
 
 // function getSlickLR(array) {
@@ -33,10 +58,9 @@ function getPosition() {
 
 /*==========window.onload==========*/
 window.onload = function() {
-	// let worksContents = document.getElementsByClassName('works-contents');
-	// getSlickLR(worksContents);
-	// slickLeft.classList.add('slick-left');
-	// slickRight.classList.add('slick-right');
+	getSlickCLR();
+	slickLeft.firstElementChild.classList.add('slick-left');
+	slickRight.firstElementChild.classList.add('slick-Right');
 }
 
 
@@ -50,11 +74,17 @@ $(function() {
 	})
 
 	let worksBox = document.querySelector('.works-box');
-	worksBox.addEventListener('mousedown', e => {
+	worksBox.addEventListener('mousemove', e => {
 		// let slickCenter = document.querySelector('.slick-center');
 		// let slickLeft = slickCenter.previousElementSibling;
 		// let slickRight = slickCenter.nextElementSibling;
-		let rect = getPosition();
+		getMovePosition();
+		slickLeft.style.setProperty('--slick-left_rotate', slickAddNumber);
+	})
+	worksBox.addEventListener('mousedown', e => {
+		getOriginalPosition();
+		addNumber = slickAfterRotato / (slickOriginalCenterX - slickOriginalLeftX);
+		console.log(addNumber);
 	})
 	
 	// .on('beforeChange', function () {
