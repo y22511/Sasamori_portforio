@@ -42,18 +42,22 @@ function getMovePosition() {
 	// console.log("LEFT:" + slickLeftX);
 	// console.log("Right" + slickRightX);
 }
-function setRemoveSlickClassLR() {	//スライダーの左右の要素にクラスを追加
+function setSlickClassLR() {	//スライダーの左右の要素にクラスを追加
 	slickLeft.classList.add('slick-left');
 	slickRight.classList.add('slick-right');
-	slickRemoveLeft.remove
+}
+function removeSlickClassLR() {	//スライダーの左右の要素にクラスを追加
+	let slickLeftRemove = document.querySelector('.slick-left');
+	let slickRightRemove = document.querySelector('.slick-right');
+	slickLeftRemove.classList.remove('slick-left');
+	slickRightRemove.classList.remove('slick-right');
 }
 
 
 /*==========window.onload==========*/
 window.onload = function() {
 	getSlickCLR();
-	slickLeft.classList.add('slick-left');
-	slickRight.classList.add('slick-right');
+	setSlickClassLR();
 }
 
 
@@ -65,6 +69,11 @@ $(function() {
 		centerPadding: "20%",
 		dots: true,
 	})
+	.on('afterChange', function () {
+		removeSlickClassLR();
+		setSlickClassLR();
+	});
+
 
 	let worksBox = document.querySelector('.works-box');
 	worksBox.addEventListener('mousemove', e => {
@@ -77,10 +86,4 @@ $(function() {
 		getOriginalPosition();
 		slickAddNumber = slickRotato / (slickOriginalCenterX - slickOriginalLeftX);
 	})
-	
-	// .on('beforeChange', function () {
-	// 	$('.slick-center').prev().addClass('slick-left').removeClass('slick-right');
-	// 	$('.slick-center').next().addClass('slick-right').removeClass('slick-left');
-	// 	$('.slick-center').removeClass('slick-left slick-right');
-	// });
 });
