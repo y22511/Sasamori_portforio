@@ -8,9 +8,18 @@ let slickRightX = '';
 let slickOriginalLeftX = '';
 let slickOriginalCenterX = ''; 
 let slickOriginalRightX = '';
-let slickLeftRotato = 0;
-let slickRotato = 30;	//変化後の角度
-let slickAddNumber = 0;		//slickの加算値
+let slick_X = 160;
+let slickLeft_X = slick_X;
+let slickRight_X = -slick_X;
+let slick_Z = 200;
+let slickLeft_Z = -slick_Z;
+let slickRight_Z = -slick_Z;
+let slickRotate = 30;	//変化後の角度
+let slickLeftRotate = slickRotate;
+let slickRightRotate = -slickRotate;
+let slickCenter_X = 0;
+let slickCenter_Z = 0;
+let slickCenterRotate = 0;
 
 
 /*==========function==========*/
@@ -21,43 +30,74 @@ function setRootProperty(name, value) {	//カスタムプロパティに値を�
 }
 
 /*-----slick-----*/
-function getSlickCLR() {
-	slickCenter = document.querySelector('.slick-center');
+function getSlickLR() {
 	slickLeft = slickCenter.previousElementSibling;
 	slickRight = slickCenter.nextElementSibling;
-}
-function getOriginalPosition() {
-	getSlickCLR();
-	slickOriginalLeftX = slickLeft.getBoundingClientRect().left;
-	slickOriginalCenterX = slickCenter.getBoundingClientRect().left;
-	slickOriginalRightX = slickRight.getBoundingClientRect().left;
-	// console.log("L:"+ slickOriginalLeftX + "   C" + slickOriginalCenterX + "   R:" + slickOriginalRightX);
-}
-function getMovePosition() {
-	getSlickCLR();
-	let slickLeftX = slickLeft.getBoundingClientRect().left;
-	let slickCenterX = slickCenter.getBoundingClientRect().left;
-	let slickRightX = slickCenter.getBoundingClientRect().left;
-	// console.log("CENTER:" + slickCenterX);
-	// console.log("LEFT:" + slickLeftX);
-	// console.log("Right" + slickRightX);
 }
 function setSlickClassLR() {	//スライダーの左右の要素にクラスを追加
 	slickLeft.classList.add('slick-left');
 	slickRight.classList.add('slick-right');
 }
-function removeSlickClassLR() {	//スライダーの左右の要素にクラスを追加
+function removeSlickClassLR() {	//スライダーの左右の要素のクラスを削除
 	let slickLeftRemove = document.querySelector('.slick-left');
 	let slickRightRemove = document.querySelector('.slick-right');
 	slickLeftRemove.classList.remove('slick-left');
 	slickRightRemove.classList.remove('slick-right');
 }
+function getOriginalPosition() {
+	slickOriginalLeftX = slickLeft.getBoundingClientRect().left;
+	slickOriginalCenterX = slickCenter.getBoundingClientRect().left;
+	slickOriginalRightX = slickRight.getBoundingClientRect().left;
+}
+function getMovePosition() {
+	slickLeftX = slickLeft.getBoundingClientRect().left;
+	slickCenterX = slickCenter.getBoundingClientRect().left;
+	slickRightX = slickRight.getBoundingClientRect().left;
+}
+function getSlickProportion(move, original, destination) {
+	let proportion = 1 - (move - original) / (destination - original);
+	return proportion;
+}
+function setSlickTransform() {
+	let leftProportion = getSlickProportion(slickLeftX, slickOriginalLeftX, slickOriginalCenterX);
+	let rightProportion = getSlickProportion(slickRightX, slickOriginalRightX, slickOriginalCenterX);
+	setRootProperty('--slick-left_rotate', leftProportion * slickLeftRotate + 'deg');
+	setRootProperty('--slick-right_rotate', rightProportion * slickRightRotate + 'deg');
+	setRootProperty('--slick-left_X', leftProportion * slickLeft_X + 'px');
+	setRootProperty('--slick-right_X', rightProportion * slickRight_X + 'px');
+	// console.log(rightProportion);
+	// console.log(leftProportion);
+	if (leftProportion * slickLeft_Z > 0 || rightProportion * slickRight_Z > 0) {
+		leftProportion = -leftProportion;
+		rightProportion = -rightProportion;
+	}
+	setRootProperty('--slick-left_Z', leftProportion * slickLeft_Z + 'px');
+	setRootProperty('--slick-right_Z', rightProportion * slickRight_Z + 'px');
+
+	let centerProportion = "";
+	//center
+	if (leftProportion > 1) {
+		centerProportion = getSlickProportion(slickCenterX, slickOriginalCenterX, slickOriginalLeftX);
+		setRootProperty('--slick-center_rotate', centerProportion * slickCenterRotate + 'deg');
+		setRootProperty('--slick-center_X', centerProportion * slickLeft_X - slickCenter_X + 'px');
+		setRootProperty('--slick-center_Z', centerProportion * slickLeft_Z - slickCenter_Z + 'px');
+	} else {
+		centerProportion = getSlickProportion(slickCenterX, slickOriginalCenterX, slickOriginalRightX);
+		setRootProperty('--slick-center_rotate', centerProportion * (slickRightRotate - slickCenterRotate) + 'deg');
+		setRootProperty('--slick-center_X', centerProportion * slickRight_X - slickCenter_X + 'px');
+		setRootProperty('--slick-center_Z', centerProportion * slickRight_Z - slickCenter_Z + 'px');
+	}
+	// console.log(centerProportion * slickRightRotate - slickCenterRotate + slickRotate);
+	console.log(centerProportion * slickCenterRotate);
+}
 
 
 /*==========window.onload==========*/
 window.onload = function() {
-	getSlickCLR();
+	slickCenter = document.querySelector('.slick-track').querySelectorAll('[tabindex="0"]')[0];
+	getSlickLR();
 	setSlickClassLR();
+	getOriginalPosition();
 }
 
 
@@ -69,7 +109,9 @@ $(function() {
 		centerPadding: "20%",
 		dots: true,
 	})
-	.on('afterChange', function () {
+	.on('afterChange', function (slick, currentSlide, nextSlide) {
+		slickCenter = document.querySelector('#slick-slide0' + nextSlide);
+		getSlickLR();
 		removeSlickClassLR();
 		setSlickClassLR();
 	});
@@ -77,13 +119,9 @@ $(function() {
 
 	let worksBox = document.querySelector('.works-box');
 	worksBox.addEventListener('mousemove', e => {
+		getSlickLR();
 		getMovePosition();
-		slickLeftRotato = 30;
-		console.log(slickLeftRotato);
-		setRootProperty('--slick-left_rotate', slickLeftRotato + 'deg');
-	})
-	worksBox.addEventListener('mousedown', e => {
-		getOriginalPosition();
-		slickAddNumber = slickRotato / (slickOriginalCenterX - slickOriginalLeftX);
+		setSlickTransform();
+		// console.log(String(getComputedStyle(slickLeft).getPropertyValue('--slick-left_X')).trim());
 	})
 });

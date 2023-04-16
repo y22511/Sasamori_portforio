@@ -58,7 +58,15 @@ $color-skills-contents_meter: #3bc4d7;
 //=================customProperty=================//
 :root {
 //-----slick-----//
-	--slick-left_rotate: 0deg;
+	--slick-left_rotate: 30deg;
+	--slick-left_X: 160px;
+	--slick-left_Z: -200px;
+	--slick-center_rotate: 0deg;
+	--slick-center_X: 0;
+	--slick-center_Z: 0;
+	--slick-right_rotate: -30deg;
+	--slick-right_X: -160px;
+	--slick-right_Z: -200px;
 }
 
 
@@ -447,7 +455,7 @@ section {
 	img {
 		position: relative;
 		transform-style: preserve-3d;
-		transform: translate3d(160px, 0px, -200px) rotateX(0deg) rotateY(--slick-left_rotate) scale(1);
+		transform: translate3d(var(--slick-left_X), 0, var(--slick-left_Z)) rotateX(0) rotateY(var(--slick-left_rotate)) scale(1);
 	}
 }
 
@@ -460,7 +468,7 @@ section {
 	img {
 		position: relative;
 		transform-style: preserve-3d;
-		transform: translate3d(0px, 0px, 0px) rotateX(0deg) rotateY(0deg) scale(1);
+		transform: translate3d(var(--slick-center_X), 0, var(--slick-center_Z)) rotateX(0) rotateY(var(--slick-center_rotate)) scale(1);
 	}
 }
 
@@ -473,7 +481,7 @@ section {
 	img {
 		position: relative;
 		transform-style: preserve-3d;
-		transform: translate3d(-160px, 0px, -200px) rotateX(0deg) rotateY(-30deg) scale(1);
+		transform: translate3d(var(--slick-right_X), 0, var(--slick-right_Z)) rotateX(0) rotateY(var(--slick-right_rotate)) scale(1);
 	}
 }
 
