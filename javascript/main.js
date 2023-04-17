@@ -1,4 +1,5 @@
 /*==========variable==========*/
+/*-----slick-----*/
 let slickCenter = '';
 let slickLeft = '';
 let slickRight = '';
@@ -69,16 +70,27 @@ function setSlickTransform() {
 	} else {
 		setRootProperty('--slick-center_Z', rightProportion * slickRight_Z + slick_Z + 'px');
 	}
-	if (leftProportion * slickLeft_Z > 0 || rightProportion * slickRight_Z > 0) {
+	if (leftProportion * slickLeft_Z > 0) {
 		leftProportion = -leftProportion;
+	} else if (rightProportion * slickRight_Z > 0) {
 		rightProportion = -rightProportion;
 	}
 	setRootProperty('--slick-left_Z', leftProportion * slickLeft_Z + 'px');
 	setRootProperty('--slick-right_Z', rightProportion * slickRight_Z + 'px');
 }
 function setSlickZindex() {
-	let leftZ = String(getComputedStyle(slickLeft).getPropertyValue('--slick-left_Z')).trim();
-	console.log(String(getComputedStyle(slickLeft).getPropertyValue('--slick-left_Z')).trim());
+	let leftZ = Number(String(getComputedStyle(slickLeft).getPropertyValue('--slick-left_Z')).trim().slice(0, -2));
+	let centerZ = Number(String(getComputedStyle(slickCenter).getPropertyValue('--slick-center_Z')).trim().slice(0, -2));
+	let rightZ = Number(String(getComputedStyle(slickRight).getPropertyValue('--slick-right_Z')).trim().slice(0,-2));
+	if (leftZ < centerZ && rightZ < centerZ) {
+		setRootProperty('--slick-left_Z-index', 0);
+		setRootProperty('--slick-center_Z-index', 1);
+		setRootProperty('--slick-right_Z-index', 0);
+	} else {
+		setRootProperty('--slick-left_Z-index', 1);
+		setRootProperty('--slick-center_Z-index', 0);
+		setRootProperty('--slick-right_Z-index', 1);
+	}
 }
 
 
@@ -95,9 +107,13 @@ window.onload = function() {
 /*-----slick-----*/
 $(function() {
 	$('.slider').slick({
+		autoplay: true,
+		autoplaySpeed: 5000,
 		centerMode: true,
 		centerPadding: "20%",
 		dots: true,
+		speed: 500,
+		swipeToSlide: true,
 	})
 	.on('afterChange', function (slick, currentSlide, nextSlide) {
 		slickCenter = document.querySelector('#slick-slide0' + nextSlide);
@@ -108,11 +124,22 @@ $(function() {
 
 
 	let worksBox = document.querySelector('.works-box');
-	worksBox.addEventListener('mousemove', e => {
+	worksBox.addEventListener('change', e => {
 		getSlickLR();
 		getMovePosition();
 		setSlickTransform();
 		setSlickZindex();
-		// console.log(String(getComputedStyle(slickLeft).getPropertyValue('--slick-left_X')).trim());
 	})
 });
+
+/*-----MutationObserver-----*/
+let observer = new MutationObserver(function() {
+	getSlickLR();
+	getMovePosition();
+	setSlickTransform();
+	setSlickZindex();
+})
+const elem = document.querySelector('.works-box');
+const config = {
+	
+}
