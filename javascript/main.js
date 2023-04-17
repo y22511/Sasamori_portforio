@@ -17,9 +17,6 @@ let slickRight_Z = -slick_Z;
 let slickRotate = 30;	//変化後の角度
 let slickLeftRotate = slickRotate;
 let slickRightRotate = -slickRotate;
-let slickCenter_X = 0;
-let slickCenter_Z = 0;
-let slickCenterRotate = 0;
 
 
 /*==========function==========*/
@@ -54,41 +51,34 @@ function getMovePosition() {
 	slickCenterX = slickCenter.getBoundingClientRect().left;
 	slickRightX = slickRight.getBoundingClientRect().left;
 }
-function getSlickProportion(move, original, destination) {
-	let proportion = 1 - (move - original) / (destination - original);
+function getSlickProportion(move, original) {
+	let proportion = 1 - (move - original) / (slickOriginalCenterX - original);
 	return proportion;
 }
 function setSlickTransform() {
-	let leftProportion = getSlickProportion(slickLeftX, slickOriginalLeftX, slickOriginalCenterX);
-	let rightProportion = getSlickProportion(slickRightX, slickOriginalRightX, slickOriginalCenterX);
+	let leftProportion = getSlickProportion(slickLeftX, slickOriginalLeftX);
+	let rightProportion = getSlickProportion(slickRightX, slickOriginalRightX);
 	setRootProperty('--slick-left_rotate', leftProportion * slickLeftRotate + 'deg');
+	setRootProperty('--slick-center_rotate', leftProportion * slickLeftRotate - slickRotate  + 'deg');
 	setRootProperty('--slick-right_rotate', rightProportion * slickRightRotate + 'deg');
 	setRootProperty('--slick-left_X', leftProportion * slickLeft_X + 'px');
+	setRootProperty('--slick-center_X', leftProportion * slickLeft_X - slick_X + 'px');
 	setRootProperty('--slick-right_X', rightProportion * slickRight_X + 'px');
-	// console.log(rightProportion);
-	// console.log(leftProportion);
+	if (leftProportion > 1) {
+		setRootProperty('--slick-center_Z', leftProportion * slickLeft_Z + slick_Z + 'px');
+	} else {
+		setRootProperty('--slick-center_Z', rightProportion * slickRight_Z + slick_Z + 'px');
+	}
 	if (leftProportion * slickLeft_Z > 0 || rightProportion * slickRight_Z > 0) {
 		leftProportion = -leftProportion;
 		rightProportion = -rightProportion;
 	}
 	setRootProperty('--slick-left_Z', leftProportion * slickLeft_Z + 'px');
 	setRootProperty('--slick-right_Z', rightProportion * slickRight_Z + 'px');
-
-	let centerProportion = "";
-	//center
-	if (leftProportion > 1) {
-		centerProportion = getSlickProportion(slickCenterX, slickOriginalCenterX, slickOriginalLeftX);
-		setRootProperty('--slick-center_rotate', centerProportion * slickCenterRotate + 'deg');
-		setRootProperty('--slick-center_X', centerProportion * slickLeft_X - slickCenter_X + 'px');
-		setRootProperty('--slick-center_Z', centerProportion * slickLeft_Z - slickCenter_Z + 'px');
-	} else {
-		centerProportion = getSlickProportion(slickCenterX, slickOriginalCenterX, slickOriginalRightX);
-		setRootProperty('--slick-center_rotate', centerProportion * (slickRightRotate - slickCenterRotate) + 'deg');
-		setRootProperty('--slick-center_X', centerProportion * slickRight_X - slickCenter_X + 'px');
-		setRootProperty('--slick-center_Z', centerProportion * slickRight_Z - slickCenter_Z + 'px');
-	}
-	// console.log(centerProportion * slickRightRotate - slickCenterRotate + slickRotate);
-	console.log(centerProportion * slickCenterRotate);
+}
+function setSlickZindex() {
+	let leftZ = String(getComputedStyle(slickLeft).getPropertyValue('--slick-left_Z')).trim();
+	console.log(String(getComputedStyle(slickLeft).getPropertyValue('--slick-left_Z')).trim());
 }
 
 
@@ -122,6 +112,7 @@ $(function() {
 		getSlickLR();
 		getMovePosition();
 		setSlickTransform();
+		setSlickZindex();
 		// console.log(String(getComputedStyle(slickLeft).getPropertyValue('--slick-left_X')).trim());
 	})
 });

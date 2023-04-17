@@ -61,12 +61,15 @@ $color-skills-contents_meter: #3bc4d7;
 	--slick-left_rotate: 30deg;
 	--slick-left_X: 160px;
 	--slick-left_Z: -200px;
+	--slick-left_Z-index: 0;
 	--slick-center_rotate: 0deg;
 	--slick-center_X: 0;
 	--slick-center_Z: 0;
+	--slick-center_Z-index: 1;
 	--slick-right_rotate: -30deg;
 	--slick-right_X: -160px;
 	--slick-right_Z: -200px;
+	--slick-right_Z-index: 0;
 }
 
 
@@ -435,21 +438,10 @@ section {
 	}
 }
 
-// .slick-list {
-// 	transform-style: preserve-3d;
-// 	perspective: 1200px;
-// }
-
-// .slick-track {
-// 	transform: preserve-3d;
-// 	perspective: 400px;
-// 	transform: translate3d(0px, 0px, 0px);
-// }
-
 /*-----.slick-left-----*/
 .slick-left {
 	position: relative;
-	top: 0;
+	z-index: var(--slick-left_Z-index);
 
 	//.slick-left img
 	img {
@@ -462,7 +454,7 @@ section {
 /*-----.slick-center-----*/
 .slick-center {
 	position: relative;
-	z-index: 1;
+	z-index: var(--slick-center_Z-index);
 
 	//.slick-center img
 	img {
@@ -475,8 +467,7 @@ section {
 /*-----.slick-right-----*/
 .slick-right {
 	position: relative;
-	top: 0;
-
+	z-index: var(--slick-right_Z-index);
 	//.slick-right img
 	img {
 		position: relative;
