@@ -41,6 +41,9 @@ $for-end-skills: 11;
 //-----color-----//
 $color-body: #f8f8f8;
 $color-heading: #1e507e;
+$color-header: rgba(255, 255, 255, 0.5);
+$color-nav: black;
+// $color-nav: rgba(0, 0, 0, 0.2);
 $color-nav_line: #1e507e;
 $color-footer: #d9d9d9;
 $color-about-heading: #ffffff;		//テキストの色
@@ -57,19 +60,27 @@ $color-skills-contents_meter: #3bc4d7;
 
 //=================customProperty=================//
 :root {
-//-----slick-----//
+	//-----slick-----//
+	--slick-left2_rotate: 60deg;
+	--slick-left2_X: 320px;
+	--slick-left2_Z: -400px;
+	--slick-left2_Z-index: 0;
 	--slick-left_rotate: 30deg;
 	--slick-left_X: 160px;
 	--slick-left_Z: -200px;
-	--slick-left_Z-index: 0;
+	--slick-left_Z-index: 1;
 	--slick-center_rotate: 0deg;
 	--slick-center_X: 0;
 	--slick-center_Z: 0;
-	--slick-center_Z-index: 1;
+	--slick-center_Z-index: 2;
 	--slick-right_rotate: -30deg;
 	--slick-right_X: -160px;
 	--slick-right_Z: -200px;
-	--slick-right_Z-index: 0;
+	--slick-right_Z-index: 1;
+	--slick-right2_rotate: -60deg;
+	--slick-right2_X: -320px;
+	--slick-right2_Z: -400px;
+	--slick-right2_Z-index: 2;
 }
 
 
@@ -136,25 +147,32 @@ h5 {
 	text-align: center;
 }
 
+
 /*=================header=================*/
 header {
 	width: 100%;
 	height: 100vh;
 	background: {
 		image: url("../img/head_backimage.jpg");
-		color: rgba(255, 255, 255, 0.5);
+		color: $color-header;
 		blend-mode: lighten;
 		size: 100% 1080px;
 		repeat: no-repeat;
 	};
 	clip-path: polygon(0 0, 100% 0, 100% 80%, 50% 100%, 0 80%);
+	position: relative;
+	z-index: 0;
 }
-
 
 /*-----nav-----*/
 nav {
-	width: 40%;
-	margin: 0 auto;
+	width: 100%;
+	padding: 0 25%;
+	background: $color-nav;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 999;
 }
 
 /*-----nav-content-----*/
@@ -188,12 +206,6 @@ nav {
 
 
 /*=================main=================*/
-
-/*-----section-----*/
-section {
-	height: 100%;
-}
-
 /*-----.about-base-----*/
 .about-base {
 	display: flex;
@@ -438,6 +450,19 @@ section {
 	}
 }
 
+/*-----.slick-left2-----*/
+.slick-left2 {
+	position: relative;
+	z-index: var(--slick-left2_Z-index);
+
+	//.slick-left img
+	img {
+		position: relative;
+		transform-style: preserve-3d;
+		transform: translate3d(var(--slick-left2_X), 0, var(--slick-left2_Z)) rotateX(0) rotateY(var(--slick-left2_rotate)) scale(1);
+	}
+}
+
 /*-----.slick-left-----*/
 .slick-left {
 	position: relative;
@@ -473,6 +498,18 @@ section {
 		position: relative;
 		transform-style: preserve-3d;
 		transform: translate3d(var(--slick-right_X), 0, var(--slick-right_Z)) rotateX(0) rotateY(var(--slick-right_rotate)) scale(1);
+	}
+}
+
+/*-----.slick-right2-----*/
+.slick-right2 {
+	position: relative;
+	z-index: var(--slick-right2_Z-index);
+	//.slick-right img
+	img {
+		position: relative;
+		transform-style: preserve-3d;
+		transform: translate3d(var(--slick-right2_X), 0, var(--slick-right2_Z)) rotateX(0) rotateY(var(--slick-right2_rotate)) scale(1);
 	}
 }
 
