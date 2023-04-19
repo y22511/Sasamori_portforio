@@ -42,8 +42,7 @@ $for-end-skills: 11;
 $color-body: #f8f8f8;
 $color-heading: #1e507e;
 $color-header: rgba(255, 255, 255, 0.5);
-$color-nav: black;
-// $color-nav: rgba(0, 0, 0, 0.2);
+$color-nav: rgba(0, 0, 0, 0.2);
 $color-nav_line: #1e507e;
 $color-footer: #d9d9d9;
 $color-about-heading: #ffffff;		//テキストの色
@@ -120,11 +119,14 @@ body {
 /*-----h1~6-----*/
 h1 {
 	height: 80%;
+	margin: 0 0.5em;
 	font-size: 6em;
 	color: $color-heading;
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	position: relative;
+	z-index: 1;
 }
 h2 {
 	width: 100%;
@@ -151,7 +153,15 @@ h5 {
 /*=================header=================*/
 header {
 	width: 100%;
-	height: 100vh;
+	height: 720px;
+	position: relative;
+	z-index: 1;
+}
+
+/*-----.header-backimg-----*/
+.header-backimg {
+	width: 100%;
+	height: 720px;
 	background: {
 		image: url("../img/head_backimage.jpg");
 		color: $color-header;
@@ -159,16 +169,26 @@ header {
 		size: 100% 1080px;
 		repeat: no-repeat;
 	};
-	clip-path: polygon(0 0, 100% 0, 100% 80%, 50% 100%, 0 80%);
-	position: relative;
+	position: absolute;
+	top: 0;
 	z-index: 0;
+
+	//.header-backimg::before
+	&::before {
+		content: '';
+		width: 100%;
+		height: 720px;
+		clip-path: polygon(50% 100%, 100% 80%, 100% 100%, 0 100%, 0 80%);
+		background: $color-body;
+		position: absolute;
+		bottom: 0;
+	}
 }
 
 /*-----nav-----*/
 nav {
 	width: 100%;
 	padding: 0 25%;
-	background: $color-nav;
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -182,6 +202,10 @@ nav {
 	text-align: center;
 	float: left;
 	position: relative;
+
+	&:hover {
+		opacity: 0.5;
+	}
 
 	//.nav-content a
 	a {
@@ -208,9 +232,15 @@ nav {
 /*=================main=================*/
 /*-----.about-base-----*/
 .about-base {
-	display: flex;
-	justify-content: center;
-	align-items: center;
+	display: block;
+	text-align: center;
+
+	//~~960px
+	@media screen and (min-width: 960px) {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
 
 	//.about-base h3
 	h3 {
@@ -228,7 +258,8 @@ nav {
 /*-----.about-favorite-----*/
 .about-favorite {
 	width: 40%;
-	margin: 0 auto;
+	min-width: 600px;
+	margin: 4rem auto;
 
 	//.about-favorite h4
 	h4 {
@@ -282,8 +313,9 @@ nav {
 /*-----.about-text-----*/
 .about-text {
 	width: 60%;
+	min-width: 720px;
 	text-align: center;
-	margin: 2rem auto;
+	margin: 4rem auto;
 
 	//.about-text h4
 	h4 {
@@ -309,8 +341,9 @@ nav {
 
 	//.about-text p
 	p {
-		width: 60%;
+		width: 100%;
 		margin: 0 auto;
+		text-align: left;
 		font-size: 1.2em;
 		line-height: 2em;
 	}
@@ -342,7 +375,7 @@ nav {
 	align-items: center;
 	
 
-	//~~768px
+	//~~960px
 	@media screen and (min-width: 960px) {
 		order: 1;
 	}
@@ -409,6 +442,15 @@ nav {
 		background: $color-skills-contents_meter;
 		position: absolute;
 	}
+
+	//.skills-contents:after
+	&::after {
+		content: "";
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		bottom: 0;
+	}
 }
 
 @for $i from $for-start-skills through $for-end-skills {
@@ -419,6 +461,8 @@ nav {
 
 /*-----#works-----*/
 #works {
+	position: relative;
+	z-index: 0;
 	h2 {
 		margin-bottom: 0.5em;
 	}
@@ -516,7 +560,7 @@ nav {
 
 /*-----#contact-----*/
 #contact {
-	height: 720px;
+	height: 640px;
 	position: relative;
 }
 

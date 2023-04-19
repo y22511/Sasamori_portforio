@@ -1,32 +1,14 @@
-/*==========variable==========*/
-/*-----slick-----*/
-let slickCenter = '';
-let slickLeft = '';
-let slickRight = '';
-let slickLeft2 = '';
-let slickRight2 = '';
-let slickLeftX = '';
-let slickCenterX = '';
-let slickRightX = '';
-let slickOriginalLeftX = '';
-let slickOriginalCenterX = ''; 
-let slickOriginalRightX = '';
-let slick_X = 160;
-let slickLeft_X = slick_X;
-let slickRight_X = -slick_X;
-let slick_Z = 200;
-let slickLeft_Z = -slick_Z;
-let slickRight_Z = -slick_Z;
-let slickRotate = 30;	//変化後の角度
-let slickLeftRotate = slickRotate;
-let slickRightRotate = -slickRotate;
-
-
 /*==========function==========*/
 /*-----setRootProperty-----*/
 function setRootProperty(name, value) {	//カスタムプロパティに値を代入(プロパティ名、代入したい値)
 	const root = document.querySelector(':root');
 	root.style.setProperty(name, value);
+}
+
+/*-----skills-----*/
+function setMainImage(nextImg) {
+	const mainImg = document.querySelector('.skills-main img');
+	mainImg.src = nextImg;
 }
 
 /*-----slick-----*/
@@ -122,7 +104,16 @@ function setSlickZindex() {
 }
 
 
-/*==========window.onload==========*/
+/*==========main==========*/
+/*-----skills-----*/
+let skillsBox = document.querySelector('.skills-box');
+skillsBox.addEventListener('click', e => {
+	let nextMainImage = e.target.childNodes[3].src;
+	if (nextMainImage != undefined) { setMainImage(nextMainImage); }
+})
+
+
+/*-----window.onload-----*/
 window.onload = function() {
 	slickCenter = document.querySelector('.slick-track').querySelectorAll('[tabindex="0"]')[0];
 	getSlickLR();
@@ -131,8 +122,28 @@ window.onload = function() {
 }
 
 
-/*==========main==========*/
 /*-----slick-----*/
+let slickCenter = '';
+let slickLeft = '';
+let slickRight = '';
+let slickLeft2 = '';
+let slickRight2 = '';
+let slickLeftX = '';
+let slickCenterX = '';
+let slickRightX = '';
+let slickOriginalLeftX = '';
+let slickOriginalCenterX = ''; 
+let slickOriginalRightX = '';
+let slick_X = 160;
+let slickLeft_X = slick_X;
+let slickRight_X = -slick_X;
+let slick_Z = 200;
+let slickLeft_Z = -slick_Z;
+let slickRight_Z = -slick_Z;
+let slickRotate = 30;	//変化後の角度
+let slickLeftRotate = slickRotate;
+let slickRightRotate = -slickRotate;
+
 $(function() {
 	$('.slider').slick({
 		autoplay: true,
