@@ -5,7 +5,49 @@ function setRootProperty(name, value) {	//カスタムプロパティに値を�
 	root.style.setProperty(name, value);
 }
 
+/*-----nav-----*/
+function setNavAnime() {
+	const target1 = document.querySelector('.humburger');
+	const target2 = document.querySelector('nav');
+	target1.classList.add('humburger1-anime');
+	target2.classList.add('humburger2-anime');
+}
+function removeNavAnime() {
+	const target1 = document.querySelector('.humburger1-anime');
+	const target2 = document.querySelector('.humburger2-anime');
+	target1.classList.remove('humburger1-anime');
+	target2.classList.remove('humburger2-anime');
+}
+function setNavAnime2() {
+	const target3 = document.querySelector('.humburger');
+	const target4 = document.querySelector('nav');
+	target3.classList.add('humburger3-anime');
+	target4.classList.add('humburger4-anime');
+}
+function removeNavAnime2() {
+	const target3 = document.querySelector('.humburger3-anime');
+	const target4 = document.querySelector('.humburger4-anime');
+	target3.classList.remove('humburger3-anime');
+	target4.classList.remove('humburger4-anime');
+}
+
+
 /*-----skills-----*/
+function setSkillsAnime() {
+	const target = document.querySelector('.line');
+	target.classList.add('skills-anime');
+}
+
+function removeSkillsAnime() {
+	const target = document.querySelector('.skills-anime');
+	target.classList.remove('skills-anime');
+}
+
+function setSkillsParsent(target) {
+	let parsent = Number(target.textContent.slice(0, -1));
+	setRootProperty('--skills-main_parsent', parsent);
+}
+
 function setMainImage(nextImg) {
 	const mainImg = document.querySelector('.skills-main img');
 	mainImg.src = nextImg;
@@ -105,11 +147,47 @@ function setSlickZindex() {
 
 
 /*==========main==========*/
+let humburger = document.querySelector('.humburger');
+humburger.addEventListener('click', function() {
+	removeNavAnime();
+	setNavAnime2();
+	setInterval(() => {
+		removeNavAnime2();
+	}, 6000);
+})
+/*-----skills-----*/
+let skillsAnimationTarget = document.querySelector('.skills-main');
+
+let navScroll = 0;
+window.addEventListener('scroll', function() {
+
+	setNavAnime();
+	
+	let scroll = window.scrollY;
+	let windowHeight = window.innerHeight;
+
+	navScroll = scroll;
+
+	/*-----skills-----*/
+	let skillsAnimationPos = skillsAnimationTarget.getBoundingClientRect().bottom + scroll;
+	if (scroll > skillsAnimationPos - windowHeight) {
+		setSkillsAnime();
+	}
+})
+
 /*-----skills-----*/
 let skillsBox = document.querySelector('.skills-box');
+
 skillsBox.addEventListener('click', e => {
 	let nextMainImage = e.target.childNodes[3].src;
-	if (nextMainImage != undefined) { setMainImage(nextMainImage); }
+	if (nextMainImage != undefined) {
+		setMainImage(nextMainImage);
+		setSkillsParsent(e.target.childNodes[5]);
+		removeSkillsAnime();
+		setInterval(() => {
+			setSkillsAnime();
+		}, 1);
+	}
 })
 
 
@@ -161,21 +239,13 @@ $(function() {
 		setSlickClassLR();
 	});
 
-
 	let worksBox = document.querySelector('.works-box');
 	worksBox.addEventListener('transitionrun', e => {
-		let roop = setInterval(() => {
+		setInterval(() => {
 			getSlickLR();
 			getMovePosition();
 			setSlickTransform();
 			setSlickZindex();
 		}, 1);
-		worksBox.addEventListener('transitionend', e => {
-			getSlickLR();
-			getMovePosition();
-			setSlickTransform();
-			setSlickZindex();
-			clearInterval(roop);
-		});
 	})
 });

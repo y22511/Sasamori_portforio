@@ -1,5 +1,6 @@
 @charset "UTF-8";
 :root {
+  --skills-main_parsent: 90;
   --slick-left2_rotate: 60deg;
   --slick-left2_X: 320px;
   --slick-left2_Z: -400px;
@@ -119,16 +120,111 @@ header {
   bottom: 0;
 }
 
+/*-----humburger-----*/
+.humburger {
+  width: 60px;
+  height: 60px;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  z-index: 9999;
+  transform: translateX(-50%);
+}
+.humburger:hover {
+  opacity: 0.6;
+  transform: scale(1.5, 1.5);
+}
+
+/*-----.humburger1-anime-----*/
+.humburger1-anime {
+  background-image: url("../img/nav_icon.png");
+  background-size: 60px 60px;
+  background-repeat: no-repeat;
+  animation: humburgerAnime1 4s forwards;
+}
+
+@keyframes humburgerAnime1 {
+  0% {
+    scale: 0;
+    transform: translateX(-50%) rotate(0);
+  }
+  50% {
+    scale: 1;
+    left: 50%;
+    transform: translateX(-50%) rotate(2880deg);
+  }
+  100% {
+    left: 100%;
+    transform: translate(-120%, 20%) rotate(2880deg);
+  }
+}
+/*-----.humburger3-anime-----*/
+.humburger3-anime {
+  background-image: url("../img/nav_icon.png");
+  background-size: 60px 60px;
+  background-repeat: no-repeat;
+  animation: humburgerAnime3 4s forwards;
+}
+
+@keyframes humburgerAnime3 {
+  0% {
+    left: 100%;
+    transform: translate(-120%, 20%) rotate(2880deg);
+  }
+  50% {
+    scale: 1;
+    left: 50%;
+    transform: translateX(-50%) rotate(2880deg);
+  }
+  100% {
+    scale: 0;
+    transform: translateX(-50%) rotate(0);
+  }
+}
 /*-----nav-----*/
 nav {
   width: 100%;
-  padding: 0 25%;
+  height: 60px;
+  padding: 0 25% 0.5em;
+  background: rgba(0, 0, 0, 0.2);
   position: fixed;
   top: 0;
   left: 0;
   z-index: 999;
 }
 
+/*-----.humburger2-anime-----*/
+.humburger2-anime {
+  animation: humburgerAnime2 2s forwards;
+}
+
+@keyframes humburgerAnime2 {
+  0% {
+    scale: 1;
+  }
+  80% {
+    scale: 1;
+  }
+  100% {
+    scale: 0;
+  }
+}
+/*-----.humburger2-anime-----*/
+.humburger4-anime {
+  animation: humburgerAnime4 6s forwards;
+}
+
+@keyframes humburgerAnime4 {
+  0% {
+    scale: 0;
+  }
+  60% {
+    scale: 0;
+  }
+  100% {
+    scale: 1;
+  }
+}
 /*-----nav-content-----*/
 .nav-content {
   width: 20%;
@@ -268,22 +364,62 @@ nav {
 
 /*-----.skills_main-----*/
 .skills-main {
-  width: 280px;
-  height: 280px;
-  margin: 0 4%;
-  background-image: radial-gradient(#ffffff 56%, transparent 57%), conic-gradient(#3bc4d7 0% 60%, #d9d9d9 60% 100%);
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  position: relative;
 }
 @media screen and (min-width: 960px) {
   .skills-main {
     order: 1;
   }
 }
-.skills-main img {
-  width: 80%;
+
+/*-----svg-----*/
+svg {
+  position: relative;
+  width: 280px;
+  height: 280px;
+  transform: rotate(-90deg);
+}
+svg circle {
+  position: relative;
+  fill: none;
+  stroke-width: 14;
+  stroke: #d9d9d9;
+  stroke-dasharray: 502;
+  stroke-dashoffset: 0;
+  stroke-linecap: round;
+}
+svg circle.line {
+  stroke-dashoffset: calc(502 - 502 * var(--skills-main_parsent) / 100);
+  stroke: #03a9f4;
+}
+
+/*----.skills-anime-----*/
+.skills-anime {
+  animation: skillsMainAnime 2s forwards;
+}
+
+@keyframes skillsMainAnime {
+  0% {
+    stroke-dasharray: 0 502;
+  }
+  99.9%, to {
+    stroke-dasharray: 502 502;
+  }
+}
+/*----.skills-center-----*/
+.skills-center {
+  width: 280px;
+  height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.skills-center img {
+  width: 48%;
+  height: 48%;
 }
 
 /*-----.skills-box-----*/
@@ -412,7 +548,11 @@ nav {
 }
 .works-contents a {
   width: 100%;
-  height: auto;
+  height: 400px;
+  position: absolute;
+  top: 0;
+  z-index: 9;
+  display: block;
 }
 
 /*-----.slick-left2-----*/

@@ -49,7 +49,7 @@ $color-about-heading: #ffffff;		//テキストの色
 $color-about-heading2: #7aa3c9;	//ボックスの色
 $color-about-heading3: #ffffff;	//左の〇の色
 $color-about-dt_line: #1e507e;
-$color-skills-main_meter1: #3bc4d7;	//メーターの色
+$color-skills-main_meter1: #03a9f4;	//メーターの色
 $color-skills-main_meter2: #d9d9d9;	//メーターの色
 $color-skills-main_center: #ffffff;	//真ん中の色
 $color-skills-contents_back: #d9d9d9;
@@ -59,6 +59,9 @@ $color-skills-contents_meter: #3bc4d7;
 
 //=================customProperty=================//
 :root {
+	//-----skills-----//
+	--skills-main_parsent: 90;
+	
 	//-----slick-----//
 	--slick-left2_rotate: 60deg;
 	--slick-left2_X: 320px;
@@ -185,14 +188,119 @@ header {
 	}
 }
 
+/*-----humburger-----*/
+.humburger {
+	width: 60px;
+	height: 60px;
+	position: fixed;
+	top: 0;
+	left: 50%;
+	z-index: 9999;
+	transform: translateX(-50%);
+
+	//.humburger:hover
+	&:hover {
+		opacity: 0.6;
+		transform: scale(1.5, 1.5);
+	}
+}
+
+/*-----.humburger1-anime-----*/
+.humburger1-anime {
+	background: {
+		image: url("../img/nav_icon.png");
+		size: 60px 60px;
+		repeat: no-repeat;
+	};
+	animation: humburgerAnime1 4s forwards;
+}
+
+@keyframes humburgerAnime1 {
+	0% {
+		scale: 0;
+		transform: translateX(-50%) rotate(0);
+	}
+	50% {
+		scale: 1;
+		left: 50%;
+		transform: translateX(-50%) rotate(2880deg);
+	}
+	100% {
+		left: 100%;
+		transform: translate(-120%, 20%) rotate(2880deg);
+	}
+}
+
+/*-----.humburger3-anime-----*/
+.humburger3-anime {
+	background: {
+		image: url("../img/nav_icon.png");
+		size: 60px 60px;
+		repeat: no-repeat;
+	};
+	animation: humburgerAnime3 4s forwards;
+}
+
+@keyframes humburgerAnime3 {
+	0% {
+		left: 100%;
+		transform: translate(-120%, 20%) rotate(2880deg);
+	}
+	50% {
+		scale: 1;
+		left: 50%;
+		transform: translateX(-50%) rotate(2880deg);
+	}
+	100% {
+		scale: 0;
+		transform: translateX(-50%) rotate(0);
+	}
+}
+
 /*-----nav-----*/
 nav {
 	width: 100%;
-	padding: 0 25%;
+	height: 60px;
+	padding: 0 25% 0.5em;
+	background: $color-nav;
 	position: fixed;
 	top: 0;
 	left: 0;
 	z-index: 999;
+}
+
+/*-----.humburger2-anime-----*/
+.humburger2-anime {
+	animation: humburgerAnime2 2s forwards;
+}
+
+@keyframes humburgerAnime2 {
+	0% {
+		scale: 1;
+	}
+	80% {
+		scale: 1;
+	}
+	100% {
+		scale: 0;
+	}
+}
+
+/*-----.humburger2-anime-----*/
+.humburger4-anime {
+	animation: humburgerAnime4 6s forwards;
+}
+
+@keyframes humburgerAnime4 {
+	0% {
+		scale: 0;
+	}
+	60% {
+		scale: 0;
+	}
+	100% {
+		scale: 1;
+	}
 }
 
 /*-----nav-content-----*/
@@ -362,29 +470,76 @@ nav {
 	}
 }
 
+
 /*-----.skills_main-----*/
 .skills-main {
-	width: 280px;
-	height: 280px;
-	margin: 0 4%;
-	background-image: radial-gradient($color-skills-main_center 56%, transparent 57%),
-						conic-gradient($color-skills-main_meter1 0% 60%, $color-skills-main_meter2 60% 100%);
-	border-radius: 50%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+	position: relative;
 	
 
 	//~~960px
 	@media screen and (min-width: 960px) {
 		order: 1;
 	}
+}
 
-	//.skills-main img
-	img {
-		width: 80%;
+
+/*-----svg-----*/
+svg {
+	position: relative;
+	width: 280px;
+	height: 280px;
+	transform: rotate(-90deg);
+	
+	//svg circle
+	circle {
+		position: relative;
+		fill: none;
+		stroke-width: 14;
+		stroke: $color-skills-main_meter2;
+		stroke-dasharray: 502;
+		stroke-dashoffset: 0;
+		stroke-linecap: round;
+	}
+
+	//svg circle.line
+	circle.line {
+		stroke-dashoffset: calc(502 - (502 * var(--skills-main_parsent)) / 100);
+		stroke: $color-skills-main_meter1;
 	}
 }
+
+/*----.skills-anime-----*/
+.skills-anime {
+	animation: skillsMainAnime 2s forwards;
+}
+
+@keyframes skillsMainAnime {
+	0% {
+		stroke-dasharray: 0 502;
+	}
+	99.9%, to {
+		stroke-dasharray: 502 502;
+	}
+}
+
+/*----.skills-center-----*/
+.skills-center {
+	width: 280px;
+	height: 280px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	top: 0;
+	left: 0;
+
+	//.skills-center img
+	img {
+		width: 48%;
+		height: 48%;
+	}
+}
+
 
 /*-----.skills-box-----*/
 .skills-box {
@@ -489,8 +644,11 @@ nav {
 	//.works-contents a
 	a {
 		width: 100%;
-		height: auto;
-		
+		height: 400px;
+		position: absolute;
+		top: 0;
+		z-index: 9;
+		display: block;
 	}
 }
 
