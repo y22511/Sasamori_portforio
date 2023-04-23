@@ -338,6 +338,15 @@ nav {
 
 
 /*=================main=================*/
+/*-----#about-----*/
+#about {
+	line-height: 1.6;
+
+	//#about dd
+	dd {
+		white-space: nowrap;
+	}
+}
 /*-----.about-base-----*/
 .about-base {
 	display: block;
@@ -568,6 +577,7 @@ svg {
 	align-items: center;
 	flex-wrap: wrap;
 	position: relative;
+	cursor: pointer;
 
 	//.skills-contents h5
 	h5 {
@@ -616,6 +626,7 @@ svg {
 
 /*-----#works-----*/
 #works {
+	margin-top: 12em;
 	position: relative;
 	z-index: 0;
 	h2 {
@@ -719,6 +730,7 @@ svg {
 /*-----#contact-----*/
 #contact {
 	height: 640px;
+	margin-top: 12em;
 	position: relative;
 }
 
