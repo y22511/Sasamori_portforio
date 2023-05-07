@@ -147,31 +147,47 @@ function setSlickZindex() {
 
 
 /*==========main==========*/
+let saveScroll = 0;
+let navScroll = true;
+
 let humburger = document.querySelector('.humburger');
 humburger.addEventListener('click', function() {
+	navScroll = false;
 	removeNavAnime();
 	setNavAnime2();
-	setInterval(() => {
+	setTimeout(() => {
 		removeNavAnime2();
+		saveScroll = 0;
+		navScroll = true;
 	}, 6000);
 })
 /*-----skills-----*/
 let skillsAnimationTarget = document.querySelector('.skills-main');
 
-let navScroll = 0;
 window.addEventListener('scroll', function() {
-
-	setNavAnime();
 	
 	let scroll = window.scrollY;
 	let windowHeight = window.innerHeight;
-
-	navScroll = scroll;
-
+	
+	if (navScroll) {
+		saveScroll++;
+		if (saveScroll >= 40) {
+			setNavAnime();
+		}
+	}
+	
 	/*-----skills-----*/
 	let skillsAnimationPos = skillsAnimationTarget.getBoundingClientRect().bottom + scroll;
 	if (scroll > skillsAnimationPos - windowHeight) {
 		setSkillsAnime();
+	}
+
+	/*-----topボタン-----*/
+	const pageTop = document.getElementById('page-top'); //トップに戻るボタンのidを取得
+	if(window.pageYOffset >= 400) {  //上から400px以上スクロールしたら
+		pageTop.classList.add('fadein'); //aタグにfadeinクラスを与える
+	} else {
+		pageTop.classList.remove('fadein');//aタグからfadeinクラスをはずす
 	}
 })
 
@@ -248,4 +264,21 @@ $(function() {
 			setSlickZindex();
 		}, 1);
 	})
+
+	/*-----画面の大きさ変更時リロード-----*/
+	var timer = false;
+	var prewidth = $(window).width();
+	$(window).resize(function() {
+		if (timer !== false) {
+			clearTimeout(timer);
+		}
+		timer = setTimeout(function() {
+			var nowWidth = $(window).width();
+			if(prewidth !== nowWidth){
+				// リロード
+				location.reload();
+			}
+			prewidth = nowWidth;
+		}, 200);
+	});
 });
