@@ -63,6 +63,11 @@ h1 {
   position: relative;
   z-index: 1;
 }
+@media screen and (max-width: 768px) {
+  h1 {
+    font-size: 3em;
+  }
+}
 
 h2 {
   width: 100%;
@@ -192,6 +197,11 @@ nav {
   left: 0;
   z-index: 999;
 }
+@media screen and (max-width: 768px) {
+  nav {
+    padding: 0 4% 0.5em;
+  }
+}
 
 /*-----.humburger2-anime-----*/
 .humburger2-anime {
@@ -252,14 +262,16 @@ nav {
   left: 50%;
   transform: translateX(-50%);
 }
+@media screen and (max-width: 768px) {
+  .nav-content a {
+    font-size: 1rem;
+  }
+}
 
 /*=================main=================*/
 /*-----#about-----*/
 #about {
   line-height: 1.6;
-}
-#about dd {
-  white-space: nowrap;
 }
 
 /*-----.about-base-----*/
@@ -285,8 +297,8 @@ nav {
 
 /*-----.about-favorite-----*/
 .about-favorite {
-  width: 40%;
-  min-width: 600px;
+  width: 100%;
+  max-width: 960px;
   margin: 4rem auto;
 }
 .about-favorite h4 {
@@ -327,11 +339,23 @@ nav {
 .about-favorite dl dd {
   width: 60%;
 }
+@media screen and (max-width: 768px) {
+  .about-favorite {
+    padding: 6rem 2rem;
+  }
+  .about-favorite dl {
+    display: block;
+  }
+  .about-favorite dd {
+    margin-bottom: 20px;
+    margin-left: 80px;
+  }
+}
 
 /*-----.about-text-----*/
 .about-text {
-  width: 60%;
-  min-width: 720px;
+  width: 100%;
+  max-width: 960px;
   text-align: center;
   margin: 4rem auto;
 }
@@ -357,6 +381,11 @@ nav {
   text-align: left;
   font-size: 1.2em;
   line-height: 2em;
+}
+@media screen and (max-width: 768px) {
+  .about-text p {
+    padding: 0 40px;
+  }
 }
 
 /*-----#skills-----*/
@@ -443,6 +472,11 @@ svg circle.line {
   height: 20px;
   min-width: 160px;
   display: block;
+}
+@media screen and (max-width: 571px) {
+  .skills-box {
+    justify-content: center;
+  }
 }
 
 /*-----.skills-contents-----*/
@@ -742,4 +776,4 @@ footer {
   padding: 2rem;
   background: #d9d9d9;
   text-align: center;
-}/*# sourceMappingURL=style.css.map */
+}

@@ -144,6 +144,10 @@ h1 {
 	justify-content: center;
 	position: relative;
 	z-index: 1;
+
+	@media screen and (max-width: 768px) {
+		font-size: 3em;
+	}
 }
 h2 {
 	width: 100%;
@@ -281,6 +285,11 @@ nav {
 	top: 0;
 	left: 0;
 	z-index: 999;
+
+	@media screen and (max-width: 768px) {
+		padding: 0 4% 0.5em;
+		
+	}
 }
 
 /*-----.humburger2-anime-----*/
@@ -348,6 +357,12 @@ nav {
 		left: 50%;
 		transform: translateX(-50%);
 	}
+
+	@media screen and (max-width: 768px) {
+		a {
+			font-size: 1rem;
+		}
+	}
 }
 
 
@@ -355,11 +370,6 @@ nav {
 /*-----#about-----*/
 #about {
 	line-height: 1.6;
-
-	//#about dd
-	dd {
-		white-space: nowrap;
-	}
 }
 /*-----.about-base-----*/
 .about-base {
@@ -388,8 +398,8 @@ nav {
 
 /*-----.about-favorite-----*/
 .about-favorite {
-	width: 40%;
-	min-width: 600px;
+	width: 100%;
+	max-width: 960px;
 	margin: 4rem auto;
 
 	//.about-favorite h4
@@ -439,12 +449,27 @@ nav {
 			width: 60%;
 		}
 	}
+	//~~960px
+	@media screen and (max-width: 768px) {
+		padding: 6rem 2rem;
+
+		dl {
+			display: block;
+		}
+
+		dd {
+			margin: {
+				bottom: 20px;
+				left: 80px;
+			}
+		}
+	}
 }
 
 /*-----.about-text-----*/
 .about-text {
-	width: 60%;
-	min-width: 720px;
+	width: 100%;
+	max-width: 960px;
 	text-align: center;
 	margin: 4rem auto;
 
@@ -477,6 +502,12 @@ nav {
 		text-align: left;
 		font-size: 1.2em;
 		line-height: 2em;
+	}
+
+	@media screen and (max-width: 768px) {
+		p {
+			padding: 0 40px;
+		}
 	}
 }
 
@@ -578,6 +609,10 @@ svg {
 		height: 20px;
 		min-width: 160px;
 		display: block;
+	}
+
+	@media screen and (max-width: 571px) {
+		justify-content: center;
 	}
 }
 
